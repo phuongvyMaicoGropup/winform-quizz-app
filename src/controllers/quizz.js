@@ -6,7 +6,7 @@ export const getAllByCourseId = async (req, res) => {
             const { courseId } = req.params;
             const quizzs = await Quizz.find({ course: courseId })
             if (!quizzs) return res.status(404).json({ message: "not-found" })
-            return res.status(200).json({ data: quizzs.map(item => item._id.toString()) })
+            return res.status(200).json({ quizzIds: quizzs.map(item => item._id.toString()) })
       } catch (error) {
             res.status(500).json({ error })
             throw new Error(error)
@@ -20,7 +20,7 @@ export const getById = async (req, res) => {
             if (!quizz)
                   return res.status(404).json({ message: "quizz-not-found" })
             const { answers, ...ignoredAnwser } = quizz._doc
-            return res.status(200).json({ data: ignoredAnwser })
+            return res.status(200).json({ ignoredAnwser })
       } catch (error) {
             res.status(500).json({ error })
       }
@@ -32,7 +32,7 @@ export const createQuizz = async (req, res) => {
 
             const quizz = await newQuizz.save()
 
-            return res.status(200).json({ data: quizz })
+            return res.status(200).json({ quizz })
       } catch (error) {
             res.status(500).json({ error })
       }
@@ -44,12 +44,13 @@ export const markById = async (req, res) => {
             const quiz = await Quizz.findById(quizzId)
             const { result } = await quiz._doc
 
-            console.log({ anwsers, result, })
-
             const point = result.reduce((prev, curr, index) => {
-                  // if curr === anwsers
+                  if (curr === answers[index]) return prev + 1
                   return prev
             }, 0)
+            console.log(point)
+
+            res.status(200).json({ point })
       } catch (error) {
             res.status(500).json({ error })
       }
