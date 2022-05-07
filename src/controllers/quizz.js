@@ -5,11 +5,11 @@ export const getAllByCourseId = async (req, res) => {
       try {
             const { courseId } = req.params;
             const quizzs = await Quizz.find({ course: courseId })
-            console.log(courseId)
             if (!quizzs) return res.status(404).json({ message: "not-found" })
-            return res.status(200).json({ quizzs })
+            return res.status(200).json({ data: quizzs.map(item => item._id.toString()) })
       } catch (error) {
             res.status(500).json({ error })
+            throw new Error(error)
       }
 }
 
