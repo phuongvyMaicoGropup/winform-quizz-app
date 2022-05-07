@@ -21,6 +21,14 @@ const quizzSchema = mongoose.Schema({
       questions: {
             type: Array,
             required: true,
+      },
+      result: {
+            type: Array,
+            required: true,
+      },
+      course: {
+            type: String,
+            required: true,
       }
 })
 
