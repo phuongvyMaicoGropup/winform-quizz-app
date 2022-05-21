@@ -1,20 +1,22 @@
-import express from 'express'
+import express from "express";
 import {
-	getById,
-	createQuizz,
-	markById,
-	getAllByCourseId,
-	getResult,
-	getByTeacherId,
-} from '../controllers/quizz'
+  getById,
+  createQuizz,
+  markById,
+  getAllByCourseId,
+  getResult,
+  getByTeacherId,
+  getDetailById,
+} from "../controllers/quizz";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/', createQuizz)
-router.get('/course/:courseId', getAllByCourseId)
-router.get('/teacher/:id', getByTeacherId)
-router.get('/:id', getById)
-router.get('/result/:id', getResult)
-router.post('/cham-diem', markById)
+router.post("/", createQuizz);
+router.get("/course/:courseId", getAllByCourseId);
+router.get("/teacher/:id", getByTeacherId);
+router.get("/:id", getById);
+router.get("/result/:id", getResult);
+router.post("/cham-diem", markById);
+router.get("/detail/:id", getDetailById);
 
-export default router
+export default router;

@@ -27,9 +27,7 @@ mongoose
     console.log("database is already");
     app.listen(process.env.APP_PORT || PORT, (req, res) => {
       console.log(
-        `server is running in on PORT ${
-          process.env.APP_PORT || PORT
-        }`,
+        `server is running in on PORT ${process.env.APP_PORT || PORT}`
       );
     });
   });
